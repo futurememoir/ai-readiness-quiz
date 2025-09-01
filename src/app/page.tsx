@@ -11,13 +11,13 @@ export default function HomePage() {
             <h1 className="text-4xl font-bold text-gray-900">AI Readiness Quiz</h1>
           </div>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Discover your organization&apos;s readiness for AI adoption with our comprehensive assessment
+            Discover your organization's readiness for AI adoption with our comprehensive assessment
           </p>
         </header>
 
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">What You&apos;ll Learn</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">What You'll Learn</h2>
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <div className="flex items-start space-x-3">
                 <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-1" />
@@ -37,7 +37,7 @@ export default function HomePage() {
                 <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-1" />
                 <div>
                   <h3 className="font-semibold text-gray-900">Team Readiness</h3>
-                  <p className="text-gray-600">Understand your team&apos;s skills, mindset, and capacity for AI adoption</p>
+                  <p className="text-gray-600">Understand your team's skills, mindset, and capacity for AI adoption</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">

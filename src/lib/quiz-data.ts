@@ -25,7 +25,7 @@ export const questions: Question[] = [
   {
     id: 1,
     category: 'tech',
-    question: 'How would you describe your organization&apos;s current technology infrastructure?',
+    question: "How would you describe your organization's current technology infrastructure?",
     options: [
       { text: 'Mostly manual processes with basic tools', score: 1 },
       { text: 'Some digital tools but limited integration', score: 2 },
@@ -36,7 +36,7 @@ export const questions: Question[] = [
   {
     id: 2,
     category: 'data',
-    question: 'How accessible and organized is your organization&apos;s data?',
+    question: "How accessible and organized is your organization's data?",
     options: [
       { text: 'Data is scattered across different systems and formats', score: 1 },
       { text: 'Some centralized data but requires manual effort to access', score: 2 },
