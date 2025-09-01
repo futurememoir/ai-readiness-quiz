@@ -1,137 +1,191 @@
 import Link from 'next/link'
-import { ArrowRight, Clock, Users } from 'lucide-react'
-import { AsciiBackground } from '@/components/ascii-background'
+import { ArrowRight, Brain, CheckCircle, Clock, Users } from 'lucide-react'
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen relative overflow-hidden" style={{ background: '#007BE5' }}>
-      <AsciiBackground />
-      
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <header className="mb-12">
+    <div className="min-h-screen" style={{ background: 'rgb(250, 246, 240)' }}>
+      <div className="container mx-auto px-4 py-8">
+        <header className="text-center mb-12">
+          <div className="flex justify-center items-center mb-6">
+            <Brain className="w-12 h-12 mr-3" style={{ color: 'rgb(252, 61, 33)' }} />
             <h1 
-              className="text-6xl font-bold text-white mb-6"
-              style={{ fontFamily: 'DM Mono, monospace' }}
+              className="text-4xl font-bold"
+              style={{ 
+                fontFamily: 'Unbounded, sans-serif',
+                color: 'rgb(0, 0, 0)'
+              }}
             >
-              AI READINESS
+              AI Readiness Quiz
             </h1>
-            <h2 
-              className="text-4xl font-bold text-white/80 mb-8"
-              style={{ fontFamily: 'DM Mono, monospace' }}
-            >
-              ASSESSMENT
-            </h2>
-            <p 
-              className="text-xl text-white/70 max-w-2xl mx-auto leading-relaxed"
-              style={{ fontFamily: 'DM Mono, monospace' }}
-            >
-              DISCOVER YOUR ORGANIZATION READINESS FOR AI ADOPTION
-            </p>
-          </header>
+          </div>
+          <p 
+            className="text-xl max-w-2xl mx-auto"
+            style={{ 
+              fontFamily: 'Inter, sans-serif',
+              color: 'rgb(0, 0, 0)'
+            }}
+          >
+            Discover your organization readiness for AI adoption with our comprehensive assessment
+          </p>
+        </header>
 
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-8 mb-8">
-            <h3 
-              className="text-xl font-semibold text-white mb-6"
-              style={{ fontFamily: 'DM Mono, monospace' }}
+        <div className="max-w-4xl mx-auto">
+          <div 
+            className="rounded-lg shadow-lg p-8 mb-8"
+            style={{ background: 'rgb(255, 255, 255)' }}
+          >
+            <h2 
+              className="text-2xl font-semibold mb-6"
+              style={{ 
+                fontFamily: 'Unbounded, sans-serif',
+                color: 'rgb(0, 0, 0)'
+              }}
             >
-              ASSESSMENT CATEGORIES
-            </h3>
-            
-            <div className="grid md:grid-cols-2 gap-6 mb-8 text-left">
-              <div className="border border-white/20 rounded p-4 bg-white/5">
-                <h4 
-                  className="font-semibold text-white mb-2"
-                  style={{ fontFamily: 'DM Mono, monospace' }}
-                >
-                  TECH INFRASTRUCTURE
-                </h4>
-                <p 
-                  className="text-white/70 text-sm"
-                  style={{ fontFamily: 'DM Mono, monospace' }}
-                >
-                  ASSESS EXISTING TECHNOLOGY AND DIGITAL MATURITY
-                </p>
+              What You'll Learn
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="flex items-start space-x-3">
+                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" style={{ color: 'rgb(32, 205, 90)' }} />
+                <div>
+                  <h3 
+                    className="font-semibold mb-1"
+                    style={{ 
+                      fontFamily: 'Inter, sans-serif',
+                      color: 'rgb(0, 0, 0)'
+                    }}
+                  >
+                    Current Tech Usage
+                  </h3>
+                  <p 
+                    style={{ 
+                      fontFamily: 'Inter, sans-serif',
+                      color: 'rgb(0, 0, 0)',
+                      opacity: 0.7
+                    }}
+                  >
+                    Assess your existing technology infrastructure and digital maturity
+                  </p>
+                </div>
               </div>
-              
-              <div className="border border-white/20 rounded p-4 bg-white/5">
-                <h4 
-                  className="font-semibold text-white mb-2"
-                  style={{ fontFamily: 'DM Mono, monospace' }}
-                >
-                  DATA & PROCESSES
-                </h4>
-                <p 
-                  className="text-white/70 text-sm"
-                  style={{ fontFamily: 'DM Mono, monospace' }}
-                >
-                  EVALUATE DATA QUALITY AND STANDARDIZATION
-                </p>
+              <div className="flex items-start space-x-3">
+                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" style={{ color: 'rgb(32, 205, 90)' }} />
+                <div>
+                  <h3 
+                    className="font-semibold mb-1"
+                    style={{ 
+                      fontFamily: 'Inter, sans-serif',
+                      color: 'rgb(0, 0, 0)'
+                    }}
+                  >
+                    Data & Processes
+                  </h3>
+                  <p 
+                    style={{ 
+                      fontFamily: 'Inter, sans-serif',
+                      color: 'rgb(0, 0, 0)',
+                      opacity: 0.7
+                    }}
+                  >
+                    Evaluate data quality, accessibility, and process standardization
+                  </p>
+                </div>
               </div>
-              
-              <div className="border border-white/20 rounded p-4 bg-white/5">
-                <h4 
-                  className="font-semibold text-white mb-2"
-                  style={{ fontFamily: 'DM Mono, monospace' }}
-                >
-                  TEAM READINESS
-                </h4>
-                <p 
-                  className="text-white/70 text-sm"
-                  style={{ fontFamily: 'DM Mono, monospace' }}
-                >
-                  UNDERSTAND TEAM SKILLS AND AI ADOPTION CAPACITY
-                </p>
+              <div className="flex items-start space-x-3">
+                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" style={{ color: 'rgb(32, 205, 90)' }} />
+                <div>
+                  <h3 
+                    className="font-semibold mb-1"
+                    style={{ 
+                      fontFamily: 'Inter, sans-serif',
+                      color: 'rgb(0, 0, 0)'
+                    }}
+                  >
+                    Team Readiness
+                  </h3>
+                  <p 
+                    style={{ 
+                      fontFamily: 'Inter, sans-serif',
+                      color: 'rgb(0, 0, 0)',
+                      opacity: 0.7
+                    }}
+                  >
+                    Understand your team skills, mindset, and capacity for AI adoption
+                  </p>
+                </div>
               </div>
-              
-              <div className="border border-white/20 rounded p-4 bg-white/5">
-                <h4 
-                  className="font-semibold text-white mb-2"
-                  style={{ fontFamily: 'DM Mono, monospace' }}
-                >
-                  BUSINESS STRATEGY
-                </h4>
-                <p 
-                  className="text-white/70 text-sm"
-                  style={{ fontFamily: 'DM Mono, monospace' }}
-                >
-                  ALIGN AI INITIATIVES WITH STRATEGIC OBJECTIVES
-                </p>
+              <div className="flex items-start space-x-3">
+                <CheckCircle className="w-6 h-6 flex-shrink-0 mt-1" style={{ color: 'rgb(32, 205, 90)' }} />
+                <div>
+                  <h3 
+                    className="font-semibold mb-1"
+                    style={{ 
+                      fontFamily: 'Inter, sans-serif',
+                      color: 'rgb(0, 0, 0)'
+                    }}
+                  >
+                    Business Goals
+                  </h3>
+                  <p 
+                    style={{ 
+                      fontFamily: 'Inter, sans-serif',
+                      color: 'rgb(0, 0, 0)',
+                      opacity: 0.7
+                    }}
+                  >
+                    Align AI initiatives with strategic objectives and ROI expectations
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div className="border-t border-white/20 pt-6">
+            <div className="border-t pt-6" style={{ borderColor: 'rgba(0, 0, 0, 0.1)' }}>
               <div 
-                className="flex items-center justify-center space-x-8 text-white/60 mb-6"
-                style={{ fontFamily: 'DM Mono, monospace' }}
+                className="flex items-center justify-between text-sm mb-6"
+                style={{ 
+                  fontFamily: 'Inter, sans-serif',
+                  color: 'rgb(0, 0, 0)',
+                  opacity: 0.6
+                }}
               >
-                <div className="flex items-center">
-                  <Clock className="w-4 h-4 mr-2" />
-                  <span>3-5 MINUTES</span>
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center">
+                    <Clock className="w-4 h-4 mr-1" />
+                    <span>3-5 minutes</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Users className="w-4 h-4 mr-1" />
+                    <span>10 questions</span>
+                  </div>
                 </div>
-                <div className="flex items-center">
-                  <Users className="w-4 h-4 mr-2" />
-                  <span>10 QUESTIONS</span>
-                </div>
-                <span>NO REGISTRATION</span>
+                <span className="font-medium" style={{ color: 'rgb(32, 205, 90)' }}>
+                  No registration required
+                </span>
               </div>
 
               <Link
                 href="/quiz"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white/20 hover:bg-white/30 text-white font-semibold rounded-lg transition-all duration-200 border border-white/30 group backdrop-blur-sm"
-                style={{ fontFamily: 'DM Mono, monospace' }}
+                className="w-full font-semibold py-4 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center group"
+                style={{ 
+                  background: 'rgb(252, 61, 33)',
+                  color: 'rgb(255, 255, 255)',
+                  fontFamily: 'Inter, sans-serif'
+                }}
               >
-                START ASSESSMENT
+                Start Your AI Readiness Assessment
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </div>
 
           <div 
-            className="text-white/50 text-sm"
-            style={{ fontFamily: 'DM Mono, monospace' }}
+            className="text-center text-sm"
+            style={{ 
+              fontFamily: 'Inter, sans-serif',
+              color: 'rgb(0, 0, 0)',
+              opacity: 0.5
+            }}
           >
-            GET PERSONALIZED INSIGHTS AND ACTIONABLE RECOMMENDATIONS
+            Get personalized insights and actionable recommendations for your AI journey
           </div>
         </div>
       </div>

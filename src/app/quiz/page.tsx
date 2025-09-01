@@ -2,9 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Brain } from 'lucide-react'
 import { questions, calculateResults } from '@/lib/quiz-data'
-import { AsciiBackground } from '@/components/ascii-background'
 
 export default function QuizPage() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -40,69 +39,95 @@ export default function QuizPage() {
 
   const getCategoryLabel = (category: string) => {
     switch(category) {
-      case 'tech': return 'TECH INFRASTRUCTURE'
-      case 'data': return 'DATA & PROCESSES'
-      case 'team': return 'TEAM READINESS'
-      case 'business': return 'BUSINESS STRATEGY'
-      default: return category.toUpperCase()
+      case 'tech': return 'Technology'
+      case 'data': return 'Data & Processes'
+      case 'team': return 'Team Readiness'
+      case 'business': return 'Business Goals'
+      default: return category
     }
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden" style={{ background: '#007BE5' }}>
-      <AsciiBackground />
-      
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-4">
-        <div className="max-w-3xl mx-auto w-full">
-          <header className="text-center mb-8">
+    <div className="min-h-screen" style={{ background: 'rgb(250, 246, 240)' }}>
+      <div className="container mx-auto px-4 py-8">
+        <header className="text-center mb-8">
+          <div className="flex justify-center items-center mb-4">
+            <Brain className="w-8 h-8 mr-2" style={{ color: 'rgb(252, 61, 33)' }} />
             <h1 
-              className="text-3xl font-bold text-white mb-4"
-              style={{ fontFamily: 'DM Mono, monospace' }}
+              className="text-2xl font-bold"
+              style={{ 
+                fontFamily: 'Unbounded, sans-serif',
+                color: 'rgb(0, 0, 0)'
+              }}
             >
-              AI READINESS ASSESSMENT
+              AI Readiness Quiz
             </h1>
-            
-            <div className="w-full bg-white/20 rounded-full h-2 max-w-md mx-auto mb-2">
-              <div 
-                className="bg-white h-2 rounded-full transition-all duration-500 ease-out"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-            
-            <p 
-              className="text-white/70 text-sm"
-              style={{ fontFamily: 'DM Mono, monospace' }}
-            >
-              QUESTION {currentQuestion + 1} OF {questions.length}
-            </p>
-          </header>
+          </div>
+          <div 
+            className="w-full rounded-full h-2 max-w-md mx-auto"
+            style={{ background: 'rgba(0, 0, 0, 0.1)' }}
+          >
+            <div 
+              className="h-2 rounded-full transition-all duration-300 ease-out"
+              style={{ 
+                width: `${progress}%`,
+                background: 'rgb(252, 61, 33)'
+              }}
+            />
+          </div>
+          <p 
+            className="text-sm mt-2"
+            style={{ 
+              fontFamily: 'Inter, sans-serif',
+              color: 'rgb(0, 0, 0)',
+              opacity: 0.6
+            }}
+          >
+            Question {currentQuestion + 1} of {questions.length}
+          </p>
+        </header>
 
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-8">
+        <div className="max-w-2xl mx-auto">
+          <div 
+            className="rounded-lg shadow-lg p-8"
+            style={{ background: 'rgb(255, 255, 255)' }}
+          >
             <div className="mb-4">
               <span 
-                className="inline-block px-3 py-1 bg-white/20 text-white text-xs font-medium rounded border border-white/30 uppercase tracking-wide"
-                style={{ fontFamily: 'DM Mono, monospace' }}
+                className="inline-block px-3 py-1 text-xs font-medium rounded-full uppercase tracking-wide"
+                style={{ 
+                  background: 'rgb(250, 246, 240)',
+                  color: 'rgb(252, 61, 33)',
+                  fontFamily: 'Fragment Mono, monospace'
+                }}
               >
                 {getCategoryLabel(currentQ.category)}
               </span>
             </div>
             
             <h2 
-              className="text-xl font-semibold text-white mb-8 leading-relaxed"
-              style={{ fontFamily: 'DM Mono, monospace' }}
+              className="text-xl font-semibold mb-6"
+              style={{ 
+                fontFamily: 'Inter, sans-serif',
+                color: 'rgb(0, 0, 0)'
+              }}
             >
-              {currentQ.question.toUpperCase()}
+              {currentQ.question}
             </h2>
 
             <div className="space-y-3">
               {currentQ.options.map((option, index) => (
                 <label
                   key={index}
-                  className={`block p-4 border rounded-lg cursor-pointer transition-all duration-200 hover:border-white/50 hover:bg-white/10 ${
+                  className={`block p-4 border rounded-lg cursor-pointer transition-all duration-200 ${
                     currentAnswer === option.score
-                      ? 'border-white bg-white/20 ring-2 ring-white/30'
-                      : 'border-white/30 bg-white/5'
+                      ? 'ring-2'
+                      : ''
                   }`}
+                  style={{
+                    borderColor: currentAnswer === option.score ? 'rgb(252, 61, 33)' : 'rgba(0, 0, 0, 0.1)',
+                    background: currentAnswer === option.score ? 'rgba(252, 61, 33, 0.05)' : 'rgb(255, 255, 255)'
+                  }}
                 >
                   <div className="flex items-start">
                     <input
@@ -111,13 +136,16 @@ export default function QuizPage() {
                       value={option.score}
                       checked={currentAnswer === option.score}
                       onChange={() => handleAnswer(option.score)}
-                      className="mt-1 mr-3 accent-white scale-125"
+                      className="mt-1 mr-3"
+                      style={{ accentColor: 'rgb(252, 61, 33)' }}
                     />
                     <span 
-                      className="text-white text-sm leading-relaxed"
-                      style={{ fontFamily: 'DM Mono, monospace' }}
+                      style={{ 
+                        fontFamily: 'Inter, sans-serif',
+                        color: 'rgb(0, 0, 0)'
+                      }}
                     >
-                      {option.text.toUpperCase()}
+                      {option.text}
                     </span>
                   </div>
                 </label>
@@ -128,20 +156,27 @@ export default function QuizPage() {
               <button
                 onClick={goToPrevious}
                 disabled={currentQuestion === 0}
-                className="flex items-center px-4 py-2 text-white/60 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-                style={{ fontFamily: 'DM Mono, monospace' }}
+                className="flex items-center px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                style={{ 
+                  fontFamily: 'Inter, sans-serif',
+                  color: currentQuestion === 0 ? 'rgba(0, 0, 0, 0.3)' : 'rgb(0, 0, 0)'
+                }}
               >
                 <ArrowLeft className="w-4 h-4 mr-1" />
-                PREVIOUS
+                Previous
               </button>
 
               <button
                 onClick={goToNext}
                 disabled={!currentAnswer}
-                className="flex items-center px-6 py-3 bg-white/20 hover:bg-white/30 text-white font-medium rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-all border border-white/30 backdrop-blur-sm"
-                style={{ fontFamily: 'DM Mono, monospace' }}
+                className="flex items-center px-6 py-3 font-medium rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                style={{ 
+                  background: currentAnswer ? 'rgb(252, 61, 33)' : 'rgba(0, 0, 0, 0.1)',
+                  color: currentAnswer ? 'rgb(255, 255, 255)' : 'rgba(0, 0, 0, 0.3)',
+                  fontFamily: 'Inter, sans-serif'
+                }}
               >
-                {currentQuestion === questions.length - 1 ? 'VIEW RESULTS' : 'NEXT'}
+                {currentQuestion === questions.length - 1 ? 'See Results' : 'Next'}
                 <ArrowRight className="w-4 h-4 ml-1" />
               </button>
             </div>

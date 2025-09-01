@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowRight, CheckCircle, AlertCircle, TrendingUp, RotateCcw, Brain } from 'lucide-react'
 import { QuizResult, questions } from '@/lib/quiz-data'
-import { AsciiBackground } from '@/components/ascii-background'
 
 export default function ResultsPage() {
   const [results, setResults] = useState<QuizResult | null>(null)
@@ -22,15 +21,20 @@ export default function ResultsPage() {
 
   if (!results) {
     return (
-      <div className="min-h-screen relative overflow-hidden flex items-center justify-center" style={{ background: '#007BE5' }}>
-        <AsciiBackground />
-        <div className="relative z-10 text-center">
-          <div 
-            className="text-white text-lg animate-pulse"
-            style={{ fontFamily: 'DM Mono, monospace' }}
+      <div 
+        className="min-h-screen flex items-center justify-center"
+        style={{ background: 'rgb(250, 246, 240)' }}
+      >
+        <div className="text-center">
+          <Brain className="w-12 h-12 mx-auto mb-4 animate-pulse" style={{ color: 'rgb(252, 61, 33)' }} />
+          <p 
+            style={{ 
+              fontFamily: 'Inter, sans-serif',
+              color: 'rgb(0, 0, 0)'
+            }}
           >
-            LOADING RESULTS...
-          </div>
+            Loading your results...
+          </p>
         </div>
       </div>
     )
@@ -38,71 +42,93 @@ export default function ResultsPage() {
 
   const getReadinessColor = (level: string) => {
     switch (level) {
-      case 'beginner': return 'text-red-300 bg-red-500/20 border-red-400/30'
-      case 'developing': return 'text-orange-300 bg-orange-500/20 border-orange-400/30'
-      case 'advanced': return 'text-blue-300 bg-blue-500/20 border-blue-400/30'
-      case 'expert': return 'text-green-300 bg-green-500/20 border-green-400/30'
-      default: return 'text-white/70 bg-white/10 border-white/30'
+      case 'beginner': return { text: 'rgb(220, 38, 127)', bg: 'rgba(220, 38, 127, 0.1)', border: 'rgb(220, 38, 127)' }
+      case 'developing': return { text: 'rgb(245, 158, 11)', bg: 'rgba(245, 158, 11, 0.1)', border: 'rgb(245, 158, 11)' }
+      case 'advanced': return { text: 'rgb(59, 130, 246)', bg: 'rgba(59, 130, 246, 0.1)', border: 'rgb(59, 130, 246)' }
+      case 'expert': return { text: 'rgb(32, 205, 90)', bg: 'rgba(32, 205, 90, 0.1)', border: 'rgb(32, 205, 90)' }
+      default: return { text: 'rgb(0, 0, 0)', bg: 'rgba(0, 0, 0, 0.1)', border: 'rgba(0, 0, 0, 0.3)' }
     }
   }
 
   const getReadinessIcon = (level: string) => {
+    const colors = getReadinessColor(level)
     switch (level) {
-      case 'beginner': return <AlertCircle className="w-6 h-6" />
-      case 'developing': return <TrendingUp className="w-6 h-6" />
-      case 'advanced': return <CheckCircle className="w-6 h-6" />
-      case 'expert': return <Brain className="w-6 h-6" />
-      default: return <AlertCircle className="w-6 h-6" />
+      case 'beginner': return <AlertCircle className="w-6 h-6" style={{ color: colors.text }} />
+      case 'developing': return <TrendingUp className="w-6 h-6" style={{ color: colors.text }} />
+      case 'advanced': return <CheckCircle className="w-6 h-6" style={{ color: colors.text }} />
+      case 'expert': return <Brain className="w-6 h-6" style={{ color: colors.text }} />
+      default: return <AlertCircle className="w-6 h-6" style={{ color: colors.text }} />
     }
   }
 
   const categoryNames = {
-    tech: 'TECH INFRASTRUCTURE',
-    data: 'DATA & PROCESSES', 
-    team: 'TEAM READINESS',
-    business: 'BUSINESS STRATEGY'
+    tech: 'Technology Infrastructure',
+    data: 'Data & Processes', 
+    team: 'Team Readiness',
+    business: 'Business Strategy'
   }
 
   const percentage = Math.round((results.totalScore / results.maxScore) * 100)
+  const levelColors = getReadinessColor(results.readinessLevel)
 
   return (
-    <div className="min-h-screen relative overflow-hidden" style={{ background: '#007BE5' }}>
-      <AsciiBackground />
-      
-      <div className="relative z-10 min-h-screen py-8 px-4">
+    <div className="min-h-screen" style={{ background: 'rgb(250, 246, 240)' }}>
+      <div className="container mx-auto px-4 py-8">
         <header className="text-center mb-8">
-          <h1 
-            className="text-3xl font-bold text-white"
-            style={{ fontFamily: 'DM Mono, monospace' }}
-          >
-            AI READINESS RESULTS
-          </h1>
+          <div className="flex justify-center items-center mb-4">
+            <Brain className="w-8 h-8 mr-2" style={{ color: 'rgb(252, 61, 33)' }} />
+            <h1 
+              className="text-2xl font-bold"
+              style={{ 
+                fontFamily: 'Unbounded, sans-serif',
+                color: 'rgb(0, 0, 0)'
+              }}
+            >
+              Your AI Readiness Results
+            </h1>
+          </div>
         </header>
 
         <div className="max-w-4xl mx-auto space-y-6">
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-8">
+          <div 
+            className="rounded-lg shadow-lg p-8"
+            style={{ background: 'rgb(255, 255, 255)' }}
+          >
             <div className="text-center mb-8">
-              <div className={`inline-flex items-center px-4 py-2 rounded-lg font-semibold text-lg border ${getReadinessColor(results.readinessLevel)}`}>
+              <div 
+                className="inline-flex items-center px-4 py-2 rounded-lg font-semibold text-lg border"
+                style={{
+                  color: levelColors.text,
+                  background: levelColors.bg,
+                  borderColor: levelColors.border
+                }}
+              >
                 {getReadinessIcon(results.readinessLevel)}
                 <span 
-                  className="ml-2 uppercase tracking-wide"
-                  style={{ fontFamily: 'DM Mono, monospace' }}
+                  className="ml-2 capitalize"
+                  style={{ fontFamily: 'Inter, sans-serif' }}
                 >
-                  {results.readinessLevel} LEVEL
+                  {results.readinessLevel} Level
                 </span>
               </div>
               <div className="mt-6">
                 <div 
-                  className="text-5xl font-bold text-white mb-2"
-                  style={{ fontFamily: 'DM Mono, monospace' }}
+                  className="text-5xl font-bold mb-2"
+                  style={{ 
+                    fontFamily: 'Unbounded, sans-serif',
+                    color: 'rgb(0, 0, 0)'
+                  }}
                 >
                   {percentage}%
                 </div>
                 <div 
-                  className="text-white/70"
-                  style={{ fontFamily: 'DM Mono, monospace' }}
+                  style={{ 
+                    fontFamily: 'Inter, sans-serif',
+                    color: 'rgb(0, 0, 0)',
+                    opacity: 0.7
+                  }}
                 >
-                  OVERALL AI READINESS SCORE
+                  Overall AI Readiness Score
                 </div>
               </div>
             </div>
@@ -113,25 +139,45 @@ export default function ResultsPage() {
                 const categoryPercentage = Math.round((score / maxCategoryScore) * 100)
                 
                 return (
-                  <div key={category} className="border border-white/20 rounded-lg p-4 bg-white/5">
+                  <div 
+                    key={category} 
+                    className="border rounded-lg p-4"
+                    style={{ 
+                      borderColor: 'rgba(0, 0, 0, 0.1)',
+                      background: 'rgb(250, 246, 240)'
+                    }}
+                  >
                     <div className="flex justify-between items-center mb-3">
                       <h3 
-                        className="font-semibold text-white text-sm"
-                        style={{ fontFamily: 'DM Mono, monospace' }}
+                        className="font-semibold text-sm"
+                        style={{ 
+                          fontFamily: 'Inter, sans-serif',
+                          color: 'rgb(0, 0, 0)'
+                        }}
                       >
                         {categoryNames[category as keyof typeof categoryNames]}
                       </h3>
                       <span 
-                        className="text-sm font-medium text-white/70"
-                        style={{ fontFamily: 'DM Mono, monospace' }}
+                        className="text-sm font-medium"
+                        style={{ 
+                          fontFamily: 'Fragment Mono, monospace',
+                          color: 'rgb(0, 0, 0)',
+                          opacity: 0.7
+                        }}
                       >
                         {categoryPercentage}%
                       </span>
                     </div>
-                    <div className="w-full bg-white/20 rounded-full h-2">
+                    <div 
+                      className="w-full rounded-full h-2"
+                      style={{ background: 'rgba(0, 0, 0, 0.1)' }}
+                    >
                       <div 
-                        className="bg-white h-2 rounded-full transition-all duration-500"
-                        style={{ width: `${categoryPercentage}%` }}
+                        className="h-2 rounded-full transition-all duration-500"
+                        style={{ 
+                          width: `${categoryPercentage}%`,
+                          background: 'rgb(252, 61, 33)'
+                        }}
                       />
                     </div>
                   </div>
@@ -140,22 +186,32 @@ export default function ResultsPage() {
             </div>
           </div>
 
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 p-8">
+          <div 
+            className="rounded-lg shadow-lg p-8"
+            style={{ background: 'rgb(255, 255, 255)' }}
+          >
             <h2 
-              className="text-xl font-semibold text-white mb-6"
-              style={{ fontFamily: 'DM Mono, monospace' }}
+              className="text-xl font-semibold mb-6"
+              style={{ 
+                fontFamily: 'Unbounded, sans-serif',
+                color: 'rgb(0, 0, 0)'
+              }}
             >
-              RECOMMENDED NEXT STEPS
+              Recommended Next Steps
             </h2>
             <div className="space-y-4">
               {results.recommendations.map((recommendation, index) => (
                 <div key={index} className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
+                  <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'rgb(32, 205, 90)' }} />
                   <p 
-                    className="text-white/80 text-sm leading-relaxed"
-                    style={{ fontFamily: 'DM Mono, monospace' }}
+                    className="leading-relaxed"
+                    style={{ 
+                      fontFamily: 'Inter, sans-serif',
+                      color: 'rgb(0, 0, 0)',
+                      opacity: 0.8
+                    }}
                   >
-                    {recommendation.toUpperCase()}
+                    {recommendation}
                   </p>
                 </div>
               ))}
@@ -165,18 +221,26 @@ export default function ResultsPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/"
-              className="flex items-center justify-center px-6 py-3 bg-white/20 hover:bg-white/30 text-white font-medium rounded-lg transition-all border border-white/30 backdrop-blur-sm"
-              style={{ fontFamily: 'DM Mono, monospace' }}
+              className="flex items-center justify-center px-6 py-3 border font-medium rounded-lg transition-colors"
+              style={{ 
+                borderColor: 'rgba(0, 0, 0, 0.2)',
+                color: 'rgb(0, 0, 0)',
+                fontFamily: 'Inter, sans-serif'
+              }}
             >
               <RotateCcw className="w-4 h-4 mr-2" />
-              TAKE AGAIN
+              Take Quiz Again
             </Link>
             <button
               onClick={() => window.print()}
-              className="flex items-center justify-center px-6 py-3 bg-white/20 hover:bg-white/30 text-white font-medium rounded-lg transition-all border border-white/30 backdrop-blur-sm"
-              style={{ fontFamily: 'DM Mono, monospace' }}
+              className="flex items-center justify-center px-6 py-3 font-medium rounded-lg transition-colors"
+              style={{ 
+                background: 'rgb(252, 61, 33)',
+                color: 'rgb(255, 255, 255)',
+                fontFamily: 'Inter, sans-serif'
+              }}
             >
-              SAVE RESULTS
+              Save Results
               <ArrowRight className="w-4 h-4 ml-2" />
             </button>
           </div>
