@@ -17,7 +17,7 @@ export default function HomePage() {
 
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">What You'll Learn</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-6">What You&apos;ll Learn</h2>
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <div className="flex items-start space-x-3">
                 <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0 mt-1" />
